@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import StoreProvider from "./StoreProvider";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Blog Next.js",
@@ -12,8 +14,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body>
+          <Navbar />
+          {children}
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

@@ -1,5 +1,6 @@
 import ButtonCTA from "@/components/ButtonCTA";
 import OverlayLayer from "@/components/OverlayLayer";
+import Link from "next/link";
 import React from "react";
 
 const Hero: React.FC = () => {
@@ -22,7 +23,9 @@ const Hero: React.FC = () => {
         <p className="mb-10 font-europa-regular text-white text-3xl">
           Book smart, travel simple
         </p>
-        <ButtonCTA>Start planning your trip</ButtonCTA>
+        <Link href="/signin">
+          <ButtonCTA>Start planning your trip</ButtonCTA>
+        </Link>
       </div>
     </div>
   );

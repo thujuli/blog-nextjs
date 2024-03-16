@@ -1,5 +1,6 @@
 import ButtonCTA from "@/components/ButtonCTA";
 import OverlayLayer from "@/components/OverlayLayer";
+import Link from "next/link";
 import React from "react";
 
 const CTA: React.FC = () => {
@@ -27,9 +28,11 @@ const CTA: React.FC = () => {
           Progressively incentivize cooperative systems through technically
           sound functionalities. The credibly productivate seamless data.
         </p>
-        <ButtonCTA className="text-indigo-500">
-          Start planning your trip
-        </ButtonCTA>
+        <Link href="/login">
+          <ButtonCTA className="text-indigo-500">
+            Start planning your trip
+          </ButtonCTA>
+        </Link>
       </div>
     </div>
   );
