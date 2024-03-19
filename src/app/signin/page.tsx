@@ -8,7 +8,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface IFormData {
   email: string;
@@ -24,6 +24,13 @@ const LoginPage: React.FC = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<IFormData>(initialFormData);
+
+  useEffect(() => {
+    const token = localStorage.getItem("success-login");
+    if (token) {
+      router.replace("/");
+    }
+  }, []);
 
   const onHandleLogin: React.MouseEventHandler<
     HTMLButtonElement
@@ -44,7 +51,7 @@ const LoginPage: React.FC = () => {
 
       alert(`Login successfully, Welcome back ${response.data[0].username}`);
       dispatch(setSuccessLoginAction(response.data[0]));
-      router.push("/");
+      router.replace("/");
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);
