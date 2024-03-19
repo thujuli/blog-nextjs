@@ -1,7 +1,7 @@
 import { abbreviateNumber, dateLocal } from "@/utils/parser";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { IoImageOutline, IoShareSocialOutline } from "react-icons/io5";
 import OverlayLayer from "./OverlayLayer";
 
@@ -28,15 +28,18 @@ const MainArticleCard: React.FC<MainArticleCardProps> = (props) => {
     share,
   } = props;
 
+  const [src, setSrc] = useState(imgAuthorUrl);
   return (
     <div>
       <div className="relative">
-        <OverlayLayer />
+        {/* <OverlayLayer /> */}
         <Image
           src={imgArticleUrl}
           alt={title}
           width={420}
           height={360}
+          placeholder="blur"
+          blurDataURL="/images/blur.jpg"
           className="w-full h-[360px] object-cover"
         />
         <div className="absolute top-6 left-6 flex gap-1">
@@ -60,10 +63,12 @@ const MainArticleCard: React.FC<MainArticleCardProps> = (props) => {
       <div className="mt-7 flex justify-between items-center">
         <div className="flex items-center gap-1">
           <Image
-            src={imgAuthorUrl}
+            src={src}
             alt={author}
             width={40}
             height={40}
+            blurDataURL="/images/blur.jpg"
+            onError={() => setSrc("/images/profile-error.jpg")}
             className="w-10 h-10 rounded-full object-cover"
           />
           <span className="font-bold">{author}</span>

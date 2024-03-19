@@ -28,10 +28,10 @@ const initialFormData: IFormData = {
 
 const ArticlesPageAdd = () => {
   const username = useAppSelector((state) => state.user.username);
-  const router = useRouter();
+  const categories = useAppSelector((state) => state.categories);
   const [formData, setFormData] = useState<IFormData>(initialFormData);
+  const [currentDate, setCurrentDate] = useState(new Date());
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const currentDate = new Date();
   const maxDescLength = 500;
 
   const onHandlePublish: React.MouseEventHandler<
@@ -57,7 +57,7 @@ const ArticlesPageAdd = () => {
 
       await axios.post(BASE_URL + "/articles", data);
       alert("Successfully create a new article!");
-      router.push("/");
+      setCurrentDate(new Date());
     } catch (error) {
       if (error instanceof AxiosError) {
         alert(error.response?.data);
@@ -86,13 +86,39 @@ const ArticlesPageAdd = () => {
                 setFormData({ ...formData, title: e.target.value })
               }
             />
+            <div className="flex flex-col">
+              <label
+                htmlFor="category"
+                className="font-europa-regular font-bold"
+              >
+                Category
+              </label>
+              <select
+                id="category"
+                className="w-full px-2 py-1 border-2 rounded"
+              >
+                {categories.map((category) => (
+                  <option key={category.id} value={category.title}>
+                    {category.title}
+                  </option>
+                ))}
+              </select>
+              {/* <input
+                type={type}
+                id={id}
+                defaultValue={defaultValue}
+                readOnly={readOnly}
+                onChange={onChange}
+                className="w-full px-2 py-1 border-2 rounded"
+              /> */}
+            </div>
             <InputForm
               id="imgArticleURL"
               label="Image Article URL"
               type="text"
-              onChange={(e) =>
-                setFormData({ ...formData, imgArticleUrl: e.target.value })
-              }
+              onChange={(e) => {
+                setFormData({ ...formData, imgArticleUrl: e.target.value });
+              }}
             />
             <TextareaForm
               id="description"
@@ -104,7 +130,10 @@ const ArticlesPageAdd = () => {
               }}
             />
             <p className="text-end text-gray-400 text-sm">
-              {textareaRef.current?.value.length}/{maxDescLength}
+              {!textareaRef.current?.value.length
+                ? "0"
+                : textareaRef.current?.value.length}
+              /{maxDescLength}
             </p>
           </div>
           <div className="w-4/12 space-y-4">
