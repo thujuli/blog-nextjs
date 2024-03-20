@@ -37,4 +37,10 @@ export const topDestinations = [
   { name: "Dominican Republic", imgUrl: "/images/top-destinations-05.jpg" },
 ];
 
+export const articlesMenu = [
+  { name: "Profile", url: "/articles/profile" },
+  { name: "Create Article", url: "/articles/add" },
+  { name: "Manage Articles", url: "/articles/manage" },
+];
+
 export const BASE_URL = "http://localhost:2000";
