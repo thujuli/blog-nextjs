@@ -32,7 +32,7 @@ const MainArticleCard: React.FC<MainArticleCardProps> = (props) => {
   return (
     <div>
       <div className="relative">
-        {/* <OverlayLayer /> */}
+        <OverlayLayer />
         <Image
           src={imgArticleUrl}
           alt={title}
