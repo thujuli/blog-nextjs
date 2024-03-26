@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import axios, { AxiosError } from "axios";
 import { BASE_URL } from "@/utils/helper";
 import { setLogout, setSuccessLoginAction } from "@/lib/features/userSlice";
-import { setCategories } from "@/lib/features/categoriesSlice";
+import { setCategories, getCategories } from "@/lib/features/categoriesSlice";
 
 interface CategoriesData {
   id: string;
@@ -24,7 +24,8 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     keepLogin();
-    getCategories();
+    // getCategories();
+    dispatch(getCategories());
   }, []);
 
   const keepLogin = async () => {
@@ -48,18 +49,18 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const getCategories = async () => {
-    try {
-      const res = await axios.get<CategoriesData[]>(BASE_URL + "/categories");
-      dispatch(setCategories(res.data));
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.error(error.response?.data);
-      } else if (error instanceof Error) {
-        console.error(error.message);
-      }
-    }
-  };
+  // const getCategories = async () => {
+  //   try {
+  //     const res = await axios.get<CategoriesData[]>(BASE_URL + "/categories");
+  //     dispatch(setCategories(res.data));
+  //   } catch (error) {
+  //     if (error instanceof AxiosError) {
+  //       console.error(error.response?.data);
+  //     } else if (error instanceof Error) {
+  //       console.error(error.message);
+  //     }
+  //   }
+  // };
 
   return (
     <nav className="z-10 absolute w-full py-5 bg-black">

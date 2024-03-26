@@ -15,7 +15,7 @@ interface ArticlesResponse {
   imgArticleUrl: string;
   author: string;
   imgAuthorUrl: string;
-  categories?: string[];
+  category: string;
   share: number;
   createdAt: string;
 }
@@ -33,6 +33,8 @@ const RecentDestinations: React.FC = () => {
       const response = await axios.get<ArticlesResponse[]>(
         BASE_URL + "/articles"
       );
+      console.log(response.data);
+
       setArticles([...articles, ...response.data]);
     } catch (error) {
       if (error instanceof Error) {
@@ -76,7 +78,7 @@ const RecentDestinations: React.FC = () => {
             imgAuthorUrl,
             share,
             title,
-            categories,
+            category,
           } = article;
 
           return (
@@ -84,7 +86,7 @@ const RecentDestinations: React.FC = () => {
               key={id}
               author={author}
               description={description}
-              categories={categories}
+              category={category}
               createdAt={createdAt}
               imgAuthorUrl={imgAuthorUrl}
               imgArticleUrl={imgArticleUrl}
