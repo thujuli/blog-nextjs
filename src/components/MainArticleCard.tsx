@@ -6,19 +6,19 @@ import { IoImageOutline, IoShareSocialOutline } from "react-icons/io5";
 import OverlayLayer from "./OverlayLayer";
 
 interface MainArticleCardProps {
-  categories?: string[];
+  category: string;
   imgArticleUrl: string;
   title: string;
   description: string;
   author: string;
   createdAt: string;
-  imgAuthorUrl: string;
-  share: number;
+  imgAuthorUrl?: string;
+  share?: number;
 }
 
 const MainArticleCard: React.FC<MainArticleCardProps> = (props) => {
   const {
-    categories,
+    category,
     imgArticleUrl,
     title,
     description,
@@ -43,16 +43,9 @@ const MainArticleCard: React.FC<MainArticleCardProps> = (props) => {
           className="w-full h-[360px] object-cover"
         />
         <div className="absolute top-6 left-6 flex gap-1">
-          {categories &&
-            categories.length > 0 &&
-            categories.map((val, idx) => (
-              <span
-                key={idx}
-                className="h-10 px-[10px] py-2 rounded bg-slate-300/40 text-white font-bold"
-              >
-                {val}
-              </span>
-            ))}
+          <span className="h-10 px-[10px] py-2 rounded bg-slate-300/40 text-white font-bold">
+            {category}
+          </span>
         </div>
         <div className="absolute top-6 right-6 flex justify-center items-center h-10 w-10 bg-slate-300/40 rounded-full">
           <IoImageOutline className="text-2xl text-white text-center" />

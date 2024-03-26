@@ -1,5 +1,7 @@
+import { BASE_URL } from "@/utils/helper";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
 
 interface CategoriesData {
   id: string;
@@ -26,3 +28,15 @@ const categoriesSlice = createSlice({
 
 export const { setCategories } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
+
+// #middleware
+export const getCategories = () => {
+  return async (dispatch: any) => {
+    try {
+      const res = await axios.get(BASE_URL + "/categories");
+      dispatch(setCategories(res.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
